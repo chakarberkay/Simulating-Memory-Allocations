@@ -3,14 +3,12 @@
 #include <vector>
 using namespace std;
 
-enum Hue {White, Black};
-
 class Node {
 public:
-    Hue color;
+    bool isWhite;
     vector<int> children; //Will contain the indexes of its sons
     Node(){
-        color = White;
+        isWhite = true;
     }
     void makeNodeWhite();
     void addSon(int index);

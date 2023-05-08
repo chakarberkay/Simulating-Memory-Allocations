@@ -1,11 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <numeric>
 using namespace std;
 #include"memory.h"
 
 
 Memory::Memory(){
     nodes = vector<Node>(30);
+    // iota(freeList.begin(), freeList.end(), 0);
     roots.push_back(0);
     roots.push_back(1);
     roots.push_back(2);
@@ -20,6 +22,8 @@ void Memory::connectNodes(int noConnected){
         int nodeIndex = occupiedNodes.at(i % (occupiedNodes.size()-1));
         do{
             newSonIndex = rand() % (nodes.size() - 1);
+            // newSonIndex = freeList.back();
+            //freeList.pop_back();
         }while(newSonIndex == nodeIndex);
         nodes.at(nodeIndex).addSon(newSonIndex);
         occupiedNodes.push_back(newSonIndex);

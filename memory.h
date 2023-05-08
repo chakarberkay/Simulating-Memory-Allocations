@@ -8,6 +8,7 @@ class Memory{
         vector<Node> nodes;
         vector<int> roots;
         vector<int> occupiedNodes;
+        vector<int> freeList;
         Memory();
         void connectNodes(int noConnected);
         void disconnectNodes(int noDisconnected);

@@ -5,7 +5,7 @@ using namespace std;
 
 
 void Node::makeNodeWhite(){
-    color = White;
+    isWhite = 1;
 }
 
 void Node::addSon(int index){
