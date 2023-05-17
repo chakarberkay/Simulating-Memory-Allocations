@@ -16,16 +16,16 @@ int main()
     collector1.propagateWhite();
 
     collector1.collectGarbageNodes();
-    cout << "nasi";
+
     for(int i = 0; i < test.nodes.size(); i++){
         cout << i << "s color is " << test.nodes.at(i).color << endl;
     }
-
+    cout << endl << "Free list is: " << endl;
     for(int i = 0; i < test.freeList.size(); i++){
-        cout << test.freeList.at(i) << endl;
+        cout << test.freeList.at(i) << ", ";
 
     }
-    cout << "FINISHED";
+    cout << endl << endl;
 
     for(int i = 0; i < test.nodes.size(); i++){
          cout << i << "s children are: " << endl;

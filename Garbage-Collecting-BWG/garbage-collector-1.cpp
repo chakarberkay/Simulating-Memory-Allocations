@@ -17,27 +17,27 @@ void CollectorV1::propagateWhite(){
                     if(memory.nodes.at(childNode).color == black){
                         memory.nodes.at(childNode).color = white;
                         changedColor = true;
+                        cout << childNode << " changed to white from black" << endl;
                     }
                 }
             }
         }
     }while(changedColor == true);
+
+    cout << endl;
     
 }
 
 void CollectorV1::makeGrayWhite(){
-    cout << memory.occupiedNodes.size() << endl;
     vector<int> occupiedNodes = memory.occupiedNodes;
     for(int i = 0; i < occupiedNodes.size(); i++){
-        cout << " test " << occupiedNodes.at(i) << endl;
         int currentIndex = occupiedNodes.at(i);
         if(memory.nodes.at(currentIndex).color == gray){
-            cout << "degismek uzere " << endl;
+            cout << currentIndex << " changed to white from gray " << endl;
             memory.nodes.at(currentIndex).color = white;
         }
-        cout << "asd " << i << endl;
     }
-    cout <<"nasiasdal";
+    cout <<endl;
 }
 
 void CollectorV1::countBlackNodes(){
@@ -53,33 +53,39 @@ void CollectorV1::markNodesBlack(){
         if(curretNode.color <= gray){
             for(int j = 0; j < curretNode.children.size(); j++){
                 int currentChildNodeIndex = curretNode.children.at(j);      // We are getting the indexes of the node's children
-                if (memory.nodes.at(currentChildNodeIndex).color == white)     // Find them in the main vector and blacken
+                if (memory.nodes.at(currentChildNodeIndex).color == white){     // Find them in the main vector and blacken
                     memory.nodes.at(currentChildNodeIndex).color = black;
+                    cout << currentChildNodeIndex << " was accessible and changed to black from white!" << endl;
+                }
             }
         }
     }
+    cout << endl;
 }
 
 void CollectorV1::newMarkingPhase(){
     oldBlackCount = 0;
     blackCount = 0;
     do{
-        cout << "old black count is " << oldBlackCount << " and normal black count is " << blackCount << endl;
         oldBlackCount = blackCount;
         blackCount = 0;
         markNodesBlack();
         countBlackNodes();
+        cout << "old black count is " << oldBlackCount << " and normal black count is " << blackCount << endl;
     }while(blackCount > oldBlackCount);
+    cout << endl;
 }
 
 void CollectorV1::collectingPahse(){
+    cout << "collected nodes are: " << endl;
     for (int i = 0; i < memory.nodes.size(); i++){
         if(memory.nodes.at(i).color == white){
-            cout << i << " is garbage and getting collected!";
+            cout << i << ", ";
             memory.freeList.push_back(i); // In pseudocode it is not clarified where to append freed nodes
                                           // So I just append all the free nodes to an array
         }
     }
+    cout << endl << endl;
 }
 
 void CollectorV1::collectGarbageNodes(){

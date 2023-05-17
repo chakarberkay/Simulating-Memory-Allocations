@@ -22,7 +22,7 @@ Memory::Memory(){
 void Memory::connectNodes(int noConnected){
     for (int i = 0; i < noConnected; i++){
         int newSonIndex;
-        int nodeIndex = occupiedNodes.at(i % (occupiedNodes.size()-1));
+        int nodeIndex = occupiedNodes.at(rand() % (occupiedNodes.size()-1));
         do{
             newSonIndex = rand() % (nodes.size() - 1);
             // newSonIndex = freeList.back();
@@ -37,6 +37,7 @@ void Memory::connectNodes(int noConnected){
 
         cout << newSonIndex << " added as a child to " << nodeIndex << endl;
     }
+    cout << endl;
 }
 
 void Memory::disconnectNodes(int noDisconnected){
@@ -49,7 +50,13 @@ void Memory::disconnectNodes(int noDisconnected){
         if(deletedNodeIndex != -1){
             nodes.at(deletedNodeIndex).color = gray;   // Make old disconnected node gray as it is suspected
                                                         // For a garbage node now
+            cout << deletedNodeIndex << " colored as gray!" << endl << endl;
+        }
+        else{
+            cout << "Couldn't delete try again " << endl << endl;
+            i--;
         }
             
     }
+    cout << endl;
 }
