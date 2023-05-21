@@ -24,6 +24,7 @@ int main()
             {
                 cout << currIndex << " is still in the occupied nodes eventhough it is free. removoing it from there" << endl;
                 test.occupiedNodes.erase(test.occupiedNodes.begin() + i);
+                i--;
             }
         }
         cout << endl;
