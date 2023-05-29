@@ -12,7 +12,9 @@ class CollectorV1 {
         void markingPhase();
         void collectingPahse();
         void collectGarbageNodes();
+        void resetStates();
     private:
+        bool resetInProg;
         int oldUsedCount, usedCount;
         Memory& memory;
         

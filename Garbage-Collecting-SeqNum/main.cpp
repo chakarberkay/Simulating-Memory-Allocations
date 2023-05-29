@@ -43,6 +43,9 @@ int main()
             }
             cout << "End of this node!!" << endl << endl;
         }
+        if(i == 1){
+            collector1.resetStates();
+        }
     }
     return 0;
 }

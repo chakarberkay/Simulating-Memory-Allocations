@@ -3,6 +3,15 @@
 CollectorV1::CollectorV1(Memory& m1): memory(m1){
 };
 
+void CollectorV1::resetStates(){
+    resetInProg = true;
+    for(int i = 0; i < memory.nodes.size(); i++){
+        memory.nodes.at(i).currState = 0;          // reset all node states to -1
+    }
+    memory.globalState = 0;                         // reset global state to 0
+    resetInProg = false;
+}
+
 void CollectorV1::markRoots(){
     for(int i = 0; i < memory.roots.size(); i++){
         int currentRootIndex = memory.roots.at(i);      // Get the index of the root
@@ -59,9 +68,13 @@ void CollectorV1::collectingPahse(){
 }
 
 void CollectorV1::collectGarbageNodes(){
-    memory.globalState++;
-    memory.freeList.clear();
-    markingPhase();
-    collectingPahse();
+    if(resetInProg)
+        collectGarbageNodes();
+    else{
+        memory.globalState++;
+        memory.freeList.clear();
+        markingPhase();
+        collectingPahse();
+    }
 }
 
