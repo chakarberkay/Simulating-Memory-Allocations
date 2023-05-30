@@ -3,31 +3,41 @@
 using namespace std;
 #include "garbage-collector-1.h"
  
-// Main() function: where the execution of program begins
 int main()
 {
-    Memory test;
-    CollectorV1 collector1(test);
+    Memory m1;
+    CollectorV1 collector1(m1);
 
-    test.connectNodes(10);
-    test.disconnectNodes(3);
+    m1.connectNodes(10);
+    m1.disconnectNodes(3);
 
-    //collector1.markRootsBlack();
     collector1.collectGarbageNodes();
-    for(int i = 0; i < test.nodes.size(); i++){
-        cout << i << "s isWhite is " << test.nodes.at(i).isWhite << endl;
+
+    for(int i = 0; i < m1.occupiedNodes.size(); i++){
+        int currIndex = m1.occupiedNodes.at(i);
+        if (count(m1.freeList.begin(), m1.freeList.end(), currIndex))
+        {
+            cout << currIndex << " is still in the occupied nodes eventhough it is free. removoing it from there" << endl;
+            m1.occupiedNodes.erase(m1.occupiedNodes.begin() + i);
+            i--;
+        }
+    }
+    cout << endl;
+
+    for(int i = 0; i < m1.nodes.size(); i++){
+        cout << i << "s isWhite is " << m1.nodes.at(i).isWhite << endl;
     }
 
-    for(int i = 0; i < test.freeList.size(); i++){
-        cout << test.freeList.at(i) << endl;
-
+    cout << endl << "Free list is: " << endl;
+    for(int i = 0; i < m1.freeList.size(); i++){
+        cout << m1.freeList.at(i) << ", ";
     }
-    cout << "FINISHED";
+    cout << endl << endl;
 
-    for(int i = 0; i < test.nodes.size(); i++){
+    for(int i = 0; i < m1.nodes.size(); i++){
          cout << i << "s children are: " << endl;
-         for(int j = 0; j < test.nodes.at(i).children.size(); j++){
-             cout << test.nodes.at(i).children.at(j) << endl;
+         for(int j = 0; j < m1.nodes.at(i).children.size(); j++){
+             cout << m1.nodes.at(i).children.at(j) << endl;
          }
          cout << "End of this node!!" << endl << endl;
     }

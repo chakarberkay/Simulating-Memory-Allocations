@@ -42,18 +42,20 @@ void CollectorV1::markingPhase(){
     markRootsBlack();
 
     do{
-        cout << "old black count is " << oldBlackCount << " and normal black count is " << blackCount << endl;
         oldBlackCount = blackCount;
         blackCount = 0;
         markNodesBlack();
         countBlackNodes();
+        cout << "old black count is " << oldBlackCount << " and normal black count is " << blackCount << endl;
     }while(blackCount > oldBlackCount);
+    cout << endl;
 }
 
 void CollectorV1::collectingPahse(){
+    cout << "collected nodes are: ";
     for (int i = 0; i < memory.nodes.size(); i++){
         if(memory.nodes.at(i).isWhite == true){
-            cout << i << " is garbage and getting collected!";
+            cout << i << ", ";
             memory.freeList.push_back(i); // In pseudocode it is not clarified where to append freed nodes
                                           // So I just append all the free nodes to an array
         }
@@ -61,6 +63,7 @@ void CollectorV1::collectingPahse(){
             memory.nodes.at(i).isWhite = true;
         }
     }
+    cout << endl << endl;
 }
 
 void CollectorV1::collectGarbageNodes(){

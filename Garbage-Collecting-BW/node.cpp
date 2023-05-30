@@ -11,28 +11,21 @@ void Node::makeNodeWhite(){
 void Node::addSon(int index){
     if (count(children.begin(), children.end(), index)) {
         std::cout << "Element found not adding it!" << endl;
+        return;
     }
     children.push_back(index);
-    //occupiedNodes.push_back(index);
 }
 
 void Node::deleteRandomSon(int currentNodesIndex){
     int deletedIndex;
-    if(children.size() == 0)
-        return;
-    if(children.size() == 1){
-        deletedIndex = 0;
+    if(children.size() == 0)        // If there is no child
+        return; 
+    if(children.size() == 1){       // If there is only 1 child
+        deletedIndex = 0;           // Assign the first one for deletedIndex
     }
-    else{
+    else{                           // Else get it randomly
         deletedIndex = rand() % (children.size()-1);
     }
     cout << "Deleting the node " << children.at(deletedIndex) << " from the " << currentNodesIndex << endl;
-
-    // for(int i = 0; i < occupiedNodes.size(); i++){
-    //     if(children.at(deletedIndex) == occupiedNodes.at(i))
-    //         occupiedNodes.erase(occupiedNodes.begin() + i);
-    // }
-
     children.erase(children.begin() + deletedIndex);
-    cout << "success" << endl;
 }
