@@ -7,13 +7,15 @@ using namespace std;
 
 Memory::Memory(){
     nodes = vector<Node>(30);
-    // iota(freeList.begin(), freeList.end(), 0);
+
     nodes.at(0).color = black;
     nodes.at(1).color = black;
     nodes.at(2).color = black;
+    
     roots.push_back(0);
     roots.push_back(1);
     roots.push_back(2);
+
     occupiedNodes.push_back(0);
     occupiedNodes.push_back(1);
     occupiedNodes.push_back(2);
@@ -25,8 +27,6 @@ void Memory::connectNodes(int noConnected){
         int nodeIndex = occupiedNodes.at(rand() % (occupiedNodes.size()-1));
         do{
             newSonIndex = rand() % (nodes.size() - 1);
-            // newSonIndex = freeList.back();
-            //freeList.pop_back();
         }while(newSonIndex == nodeIndex);
         nodes.at(nodeIndex).addSon(newSonIndex);
         if (std::find(occupiedNodes.begin(), occupiedNodes.end(), newSonIndex) == occupiedNodes.end()) {

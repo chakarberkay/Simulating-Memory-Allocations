@@ -6,31 +6,31 @@ using namespace std;
 // Main() function: where the execution of program begins
 int main()
 {
-    Memory test;
-    CollectorV1 collector1(test);
+    Memory m1;
+    CollectorV1 collector1(m1);
 
-    test.connectNodes(10);
-    test.disconnectNodes(3);
+    m1.connectNodes(10);
+    m1.disconnectNodes(3);
 
     collector1.makeGrayWhite();
     collector1.propagateWhite();
 
     collector1.collectGarbageNodes();
 
-    for(int i = 0; i < test.nodes.size(); i++){
-        cout << i << "s color is " << test.nodes.at(i).color << endl;
+    for(int i = 0; i < m1.nodes.size(); i++){
+        cout << i << "s color is " << m1.nodes.at(i).color << endl;
     }
     cout << endl << "Free list is: " << endl;
-    for(int i = 0; i < test.freeList.size(); i++){
-        cout << test.freeList.at(i) << ", ";
+    for(int i = 0; i < m1.freeList.size(); i++){
+        cout << m1.freeList.at(i) << ", ";
 
     }
     cout << endl << endl;
 
-    for(int i = 0; i < test.nodes.size(); i++){
+    for(int i = 0; i < m1.nodes.size(); i++){
          cout << i << "s children are: " << endl;
-         for(int j = 0; j < test.nodes.at(i).children.size(); j++){
-             cout << test.nodes.at(i).children.at(j) << endl;
+         for(int j = 0; j < m1.nodes.at(i).children.size(); j++){
+             cout << m1.nodes.at(i).children.at(j) << endl;
          }
          cout << "End of this node!!" << endl << endl;
     }
